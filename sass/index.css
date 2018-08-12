@@ -47,8 +47,8 @@ body .boxTitle .buttons div {
 
 body .boxTitle .buttons div .buttonClass {
   background: #F5F1ED;
-  background-image: -webkit-gradient(linear, left top, left bottom, from(#F5F1ED), to(#c1c1c1));
-  background-image: linear-gradient(to bottom, #F5F1ED, #c1c1c1);
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#f5f1ed52), to(#c1c1c11f));
+  background-image: linear-gradient(to bottom, #f5f1ed52, #c1c1c11f);
   border-radius: 46px;
   height: 18px;
   color: #424240;
