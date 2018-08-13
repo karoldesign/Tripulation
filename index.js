@@ -2,10 +2,14 @@
 function orderPosition() {
     c = document.getElementsByTagName('center');
     d = [];
+    let m1 = 0;
+    let m2 = 0;
+
     for (let i = 0; i < c.length; i++) {
         d.push(c[i]);
     }
     d.shift();
+
     for (let i = 0; i < d.length; i++) {
         for(let j=0; j < d.length - 1; j++){
             // obtengo las dos razas
@@ -19,61 +23,48 @@ function orderPosition() {
             p1 = d[j].innerHTML.indexOf('science') > -1 ? 'science' : (d[j].innerHTML.indexOf('engineering') > -1 ? 'engineering': 'command')
             p2 = d[j+1].innerHTML.indexOf('science') > -1 ? 'science' : (d[j+1].innerHTML.indexOf('engineering') > -1 ? 'engineering': 'command')
 
-            if (r1 == 'human' && p1 == 'command') {
-                m1 = 3
-            }
-            if (r1 == 'human' && p1 == 'science') {
-                m1 = 1
-            }
-            if (r1 == 'human' && p1 == 'engineering') {
-                m1 = 2
-            }
-            if (r1 == 'vulcano' && p1 == 'science') {
-                m1 = 3
-            }
-            if (r1 == 'vulcano' && p1 == 'command') {
-                m1 = 2
-            }
-            if (r1 == 'vulcano' && p1 == 'engineering') {
-                m1 = 1
-            }
-            if (r1 == 'betazoid' && p1 == 'science') {
-                m1 = 2
-            }
-            if (r1 == 'betazoid' && p1 == 'command') {
-                m1 = 1
-            }
-            if (r1 == 'betazoid' && p1 == 'engineering') {
-                m1 = 3
-            }
 
-            if (r2 == 'human' && p2 == 'command') {
-                m2 = 3
-            }
-            if (r2 == 'human' && p2 == 'science') {
-                m2 = 1
-            }
-            if (r2 == 'human' && p2 == 'engineering') {
-                m2 = 2
-            }
-            if (r2 == 'vulcano' && p2 == 'science') {
-                m2 = 3
-            }
-            if (r2 == 'vulcano' && p2 == 'command') {
-                m2 = 2
-            }
-            if (r2 == 'vulcano' && p2 == 'engineering') {
-                m2 = 1
-            }
-            if (r2 == 'betazoid' && p2 == 'science') {
-                m2 = 2
-            }
-            if (r2 == 'betazoid' && p2 == 'command') {
-                m2 = 1
-            }
-            if (r2 == 'betazoid' && p2 == 'engineering') {
-                m2 = 3
-            }
+            switch (r1, r2, p1, p2, m1, m2) {
+                case (r1 == 'human' && p1 == 'command'):
+                    return m1 = 3
+                case (r1 == 'human' && p1 == 'science'):
+                    return m1 = 1
+                case (r1 == 'human' && p1 == 'engineering'):
+                    return m1 = 2
+                case (r1 == 'vulcano' && p1 == 'science'):
+                    return m1 = 3
+                case (r1 == 'vulcano' && p1 == 'command'):
+                    return m1 = 2
+                case (r1 == 'vulcano' && p1 == 'engineering'):
+                    return m1 = 1
+                case (r1 == 'betazoid' && p1 == 'science'):
+                    return m1 = 2
+                case (r1 == 'betazoid' && p1 == 'command'):
+                    return m1 = 1
+                case (r1 == 'betazoid' && p1 == 'engineering'):
+                    return m1 = 3
+                case (r2 == 'human' && p2 == 'command'):
+                    return m2 = 3
+                case (r2 == 'human' && p2 == 'science'):
+                    return m2 = 1
+                case (r2 == 'human' && p2 == 'engineering'):
+                    return m2 = 2
+                case (r2 == 'vulcano' && p2 == 'science'):
+                    return m2 = 3
+                case (r2 == 'vulcano' && p2 == 'command'):
+                    return m2 = 2
+                case (r2 == 'vulcano' && p2 == 'engineering'):
+                    return m2 = 1
+                case (r2 == 'betazoid' && p2 == 'science'):
+                    return m2 = 2
+                case (r2 == 'betazoid' && p2 == 'command'):
+                    return m2 = 1
+                case (r2 == 'betazoid' && p2 == 'engineering'):
+                    return m2 = 3
+                default:
+                  console.log("ERROR");
+              }
+
             if (m2 > m1 || (m1 == m2 && p2 == 'command') || (m1 == m2 && p1 != 'command' && p2 == 'science')) {
                 let z = d[j]
                 let y = d[j + 1]
