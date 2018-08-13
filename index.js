@@ -1,81 +1,111 @@
 //onclick='orderPosition()'
 function orderPosition() {
-    c = document.getElementsByTagName('center');
-    d = [];
-    let m1 = 0;
-    let m2 = 0;
+    let center = document.getElementsByTagName('center');
+    let newArray = [];
+    
+    const human ='human';
+    const vulcano = 'vulcano';
+    const betazoid = 'betazoid';
+    const command= 'command';
+    const science = 'science';
+    const engineering = 'engineering';
 
-    for (let i = 0; i < c.length; i++) {
-        d.push(c[i]);
+    for (let i = 0; i < center.length; i++) {
+        newArray.push(center[i]);
     }
-    d.shift();
+    newArray.shift();
 
-    for (let i = 0; i < d.length; i++) {
-        for(let j=0; j < d.length - 1; j++){
+    for (let i = 0; i < newArray.length; i++) {
+        for(let j=0; j < newArray.length - 1; j++){
+            let m1 = 0;
+            let m2 = 0;
             // obtengo las dos razas
-            r1 = d[j].innerHTML.indexOf('human') > -1 
-            ? 'human' 
-            : (d[j].innerHTML.indexOf('betazoid') > -1 
-                ? 'betazoid'
-                : 'vulcano'
+            let r1 = newArray[j].innerHTML.indexOf(human) > -1 
+            ? human 
+            : (newArray[j].innerHTML.indexOf(betazoid) > -1 
+                ? betazoid
+                : vulcano
             )
-            r2 = d[j+1].innerHTML.indexOf('human') > -1 ? 'human' : (d[j+1].innerHTML.indexOf('betazoid') > -1 ? 'betazoid': 'vulcano')
-            p1 = d[j].innerHTML.indexOf('science') > -1 ? 'science' : (d[j].innerHTML.indexOf('engineering') > -1 ? 'engineering': 'command')
-            p2 = d[j+1].innerHTML.indexOf('science') > -1 ? 'science' : (d[j+1].innerHTML.indexOf('engineering') > -1 ? 'engineering': 'command')
+            let p1 = newArray[j].innerHTML.indexOf(science) > -1 
+            ? science 
+            : (newArray[j].innerHTML.indexOf(engineering) > -1 
+                ? engineering
+                : command
+            )
+            let p2 = newArray[j+1].innerHTML.indexOf(science) > -1 
+            ? science 
+            : (newArray[j+1].innerHTML.indexOf(engineering) > -1 
+                ? engineering
+                : command
+            )
+            // debugger;
 
+            if (r1 == human) {
+                switch (p1) {
+                    case command:
+                        m1 += 3
+                        m2 += 3
+                        break;
+                    case science:
+                        m1 += 1
+                        m2 += 1
+                        break;
+                    case engineering:
+                        m1 += 2
+                        m2 += 2
+                        break;
+                    default:
+                    console.log("ERROR r1 == human");
+                }
 
-            switch (r1, r2, p1, p2, m1, m2) {
-                case (r1 == 'human' && p1 == 'command'):
-                    return m1 = 3
-                case (r1 == 'human' && p1 == 'science'):
-                    return m1 = 1
-                case (r1 == 'human' && p1 == 'engineering'):
-                    return m1 = 2
-                case (r1 == 'vulcano' && p1 == 'science'):
-                    return m1 = 3
-                case (r1 == 'vulcano' && p1 == 'command'):
-                    return m1 = 2
-                case (r1 == 'vulcano' && p1 == 'engineering'):
-                    return m1 = 1
-                case (r1 == 'betazoid' && p1 == 'science'):
-                    return m1 = 2
-                case (r1 == 'betazoid' && p1 == 'command'):
-                    return m1 = 1
-                case (r1 == 'betazoid' && p1 == 'engineering'):
-                    return m1 = 3
-                case (r2 == 'human' && p2 == 'command'):
-                    return m2 = 3
-                case (r2 == 'human' && p2 == 'science'):
-                    return m2 = 1
-                case (r2 == 'human' && p2 == 'engineering'):
-                    return m2 = 2
-                case (r2 == 'vulcano' && p2 == 'science'):
-                    return m2 = 3
-                case (r2 == 'vulcano' && p2 == 'command'):
-                    return m2 = 2
-                case (r2 == 'vulcano' && p2 == 'engineering'):
-                    return m2 = 1
-                case (r2 == 'betazoid' && p2 == 'science'):
-                    return m2 = 2
-                case (r2 == 'betazoid' && p2 == 'command'):
-                    return m2 = 1
-                case (r2 == 'betazoid' && p2 == 'engineering'):
-                    return m2 = 3
-                default:
-                  console.log("ERROR");
-              }
+            } else if(r1 == vulcano) {
+                switch (p1) {
+                    case command:
+                        m1 += 2
+                        m2 += 2
+                        break;
+                    case science:
+                        m1 += 3
+                        m2 += 3
+                        break;
+                    case engineering:
+                        m1 += 1
+                        m2 += 1
+                        break;
+                    default:
+                    console.log("ERROR r1 == vulcano");
+                    }
 
-            if (m2 > m1 || (m1 == m2 && p2 == 'command') || (m1 == m2 && p1 != 'command' && p2 == 'science')) {
-                let z = d[j]
-                let y = d[j + 1]
-                d[j] = y
-                d[j + 1] = z
+            } else if (r1 == betazoid){
+                switch (p1) {
+                    case command:
+                        m1 += 1
+                        m2 += 1
+                        break;
+                    case science:
+                        m1 += 2
+                        m2 += 2
+                        break;
+                    case engineering:
+                        m1 += 3
+                        m2 += 3
+                        break;
+                    default:
+                    console.log("r1 == betazoid");
+                }
+            }
+    
+            if (m2 > m1 || (m1 == m2 && p2 == command) || (m1 == m2 && p1 != command && p2 == science)) {
+                let z = newArray[j]
+                let y = newArray[j + 1]
+                newArray[j] = y
+                newArray[j + 1] = z
             }
         }
     }
     document.querySelector('#tripulation').innerHTML = '';
-    for (i = 0; i < d.length; i++) {
-        document.querySelector('#tripulation').append(d[i]);
+    for (i = 0; i < newArray.length; i++) {
+        document.querySelector('#tripulation').append(newArray[i]);
     }
 }
 //onclick='orderAlphabet()'
@@ -123,61 +153,92 @@ rawFile.onload = function() {
 function show() {
     let tripulationBox = document.querySelector('#tripulation');
     a = eval(rawFile.responseText);
+
+    const human ='human';
+    const vulcano = 'vulcano';
+    const betazoid = 'betazoid';
+    const command= 'command';
+    const science = 'science';
+    const engineering = 'engineering';
+    
     let myArticle = document.createElement('div');
     for (let i = 0; i < a.length; i++) {
-            if (a[i].gender) {
+        let position = a[i].position;
+        let race = a[i].race;
+        let name = a[i].name;
+        let gender = a[i].gender;
+        let ip = a[i].ip_address;
+            
                 b = '<center id="center"><div id="box">'
-                if (a[i].position == 'science') {
+                if (a[i].position == science) {
                     b += '<div class="boxColour blue"></div>' 
 
-                } else if (a[i].position == 'engineering') {
+                } else if (a[i].position == engineering) {
                     b += '<div class="boxColour red"></div>' 
 
-                } else if (a[i].position == 'command') {
+                } else {
                     b += '<div class="boxColour yellow"></div>' 
                 }
 
-                b += '<div class="dates"><div id="box_name">' + a[i].name + '</div>'
-                b += '<div id="box_gender">' + 'Gender: ' + '<div class="styleText">' + a[i].gender + '</div></div>'
-                b += '<div id="box_id">' + 'Id: ' + a[i].ip_address + '</div>'
-                b += '<div id="box_race">' + 'Race: ' + a[i].race + '</div>'
-                b += '<div id="box_position">' + 'Position: ' + a[i].position + '</div></div>'
+                b += '<div class="dates"><div id="box_name">' + name + '</div>'
+                b += '<div id="box_gender">' + 'Gender: ' + '<div class="styleText">' + gender + '</div></div>'
+                b += '<div id="box_id">' + 'Id: ' + ip + '</div>'
+                b += '<div id="box_race">' + 'Race: ' + race + '</div>'
+                b += '<div id="box_position">' + 'Position: ' + position + '</div></div>'
 
-                if (a[i].race == 'human' && a[i].position == 'command') {
-                    b += '<div class="boxNumber">x3</div>'
-                }
-                if (a[i].race == 'human' && a[i].position == 'science') {
-                    b += '<div class="boxNumber">x1</div>'
-                }
-                if (a[i].race == 'human' && a[i].position == 'engineering') {
-                    if (a[i].name == 'Scotty') {
-                        b += '<div class="boxNumber">x4</div>'
-                    } else {
-                        b += '<div class="boxNumber">x2</div>'
+                if (race == human) {
+                    switch (position) {
+                        case command:
+                            b += '<div class="boxNumber">x3</div>'
+                            break;
+                        case science:
+                            b += '<div class="boxNumber">x1</div>'
+                            break;
+                        case engineering:
+                            if (name == 'Scotty') {
+                                b += '<div class="boxNumber">x4</div>'
+                            break;
+                            } else {
+                                b += '<div class="boxNumber">x2</div>'
+                            break;
+                            }
+                        default:
+                        console.log("ERROR race == human");
                     }
-                }
-                
-                if (a[i].race == 'vulcano' && a[i].position == 'command') {
-                    b += '<div class="boxNumber">x2</div>'
-                }
-                if (a[i].race == 'vulcano' && a[i].position == 'engineering') {
-                    b += '<div class="boxNumber">x1</div>'
-                }
-                if (a[i].race == 'vulcano' && a[i].position == 'science') {
-                    b += '<div class="boxNumber">x3</div>'
-                }
-                
-                if (a[i].race == 'betazoid' && a[i].position == 'command') {
-                    b += '<div class="boxNumber">x1</div>'
-                }
-                if (a[i].race == 'betazoid' && a[i].position == 'engineering') {
-                    b += '<div class="boxNumber">x3</div>'
-                }
-                if (a[i].race == 'betazoid' && a[i].position == 'science') {
-                    b += '<div class="boxNumber">x2</div>'
+
+                } else if(race == vulcano) {
+                    switch (position) {
+                        case command:
+                            b += '<div class="boxNumber">x2</div>'
+                            break;
+                        case engineering:
+                            b += '<div class="boxNumber">x1</div>'
+                            break;
+                        case science:
+                            b += '<div class="boxNumber">x3</div>'
+                            break;
+                        default:
+                        console.log("ERROR race == vulcano");
+                        }
+
+                } else if (race == betazoid){
+                    switch (position) {
+                        case command:
+                            b += '<div class="boxNumber">x1</div>'
+                            break;
+                        case engineering:
+                            b += '<div class="boxNumber">x3</div>'
+                            break;
+                        case science:
+                            b += '<div class="boxNumber">x2</div>'
+                            break;
+                        default:
+                        console.log("race == betazoid");
+                    }
+
                 }
                 b +=  '</div></center>'
-            }
+            
 
         document.body.innerHTML += b;
     }
