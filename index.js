@@ -1,8 +1,8 @@
 //onclick='orderPosition()'
 function orderPosition() {
     let center = document.getElementsByTagName('center');
+    var arr = Array.from(center);
     let newArray = [];
-    
     const human ='human';
     const vulcano = 'vulcano';
     const betazoid = 'betazoid';
@@ -10,19 +10,19 @@ function orderPosition() {
     const science = 'science';
     const engineering = 'engineering';
 
-    for (let i = 0; i < center.length; i++) {
+    for (let i = 0; i < arr.length; i++) {
         newArray.push(center[i]);
     }
+
     newArray.shift();
 
     for (let i = 0; i < newArray.length; i++) {
         for(let j=0; j < newArray.length - 1; j++){
             let m1 = 0;
             let m2 = 0;
-            // obtengo las dos razas
             let r1 = newArray[j].innerHTML.indexOf(human) > -1 
             ? human 
-            : (newArray[j].innerHTML.indexOf(betazoid) > -1 
+            : (newArray[j].innerHTML.indexOf(betazoid) > -1
                 ? betazoid
                 : vulcano
             )
@@ -111,27 +111,27 @@ function orderPosition() {
 //onclick='orderAlphabet()'
 function orderAlphabet() {
     c = document.getElementsByTagName('center');
-    d = [];
+    newArray = [];
     for (var i = 0; i < c.length; i++) {
-        d.push(c[i]);
+        newArray.push(c[i]);
     }
-    d.shift();
+    newArray.shift();
     for (var i = 0; i < d.length; i++) {
         for(var j=0; j < d.length - 1; j++){
             // obtengo las dos razas
-            n1 = d[j].querySelector('div').innerText;
-            n2 = d[j+1].querySelector('div').innerText;            
+            n1 = newArray[j].querySelector('div').innerText;
+            n2 = newArray[j+1].querySelector('div').innerText;            
             if (n1 > n2) {
-                var z = d[j]
-                var y = d[j + 1]
-                d[j] = y
-                d[j + 1] = z
+                var z = newArray[j]
+                var y = newArray[j + 1]
+                newArray[j] = y
+                newArray[j + 1] = z
             }
         }
     }
     document.querySelector('#tripulation').innerHTML = '';
-    for (i = 0; i < d.length; i++) {
-        document.querySelector('#tripulation').append(d[i]);
+    for (i = 0; i < newArray.length; i++) {
+        document.querySelector('#tripulation').append(newArray[i]);
     }
 }
 
